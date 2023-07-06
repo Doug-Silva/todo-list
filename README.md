@@ -6,7 +6,7 @@
   </div><br>
 
   <h1>TODO List</h1>
-  <p>Projeto TODO List que utiliza técnicas de TypeScript
+  <p>Projeto TODO List, que utiliza técnicas de TypeScript<br>
     Elaborado no curso de programação: DevSamurai (https://devsamurai.com.br)
   </p>
 
