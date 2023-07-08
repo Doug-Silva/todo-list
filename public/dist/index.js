@@ -44,7 +44,7 @@
             this.notifications = notifications;
         }
         Reminder.prototype.render = function () {
-            return "\n            ---> Reminder <---\n            description: ".concat(this.description, "\n            date: ").concat(DateUtils.formatDate(this.date), "\n            platform: ").concat(this.notifications.join(','), "\n            ");
+            return "\n            ---> Reminder <---\n            Descri\u00E7\u00E3o: ".concat(this.description, "\n            Data: ").concat(DateUtils.formatDate(this.date), "\n            Tipo Notifica\u00E7\u00E3o: ").concat(this.notifications.join(','), "\n            ");
         };
         return Reminder;
     }());
@@ -59,7 +59,7 @@
             this.description = description;
         }
         Todo.prototype.render = function () {
-            return "\n            ---> TODO <---\n            description: ".concat(this.description, "\n            done: ").concat(this.done, "\n            ");
+            return "\n            ---> TODO <---\n            Descri\u00E7\u00E3o: ".concat(this.description, "\n            Conclus\u00E3o: ").concat(this.done, "\n            ");
         };
         return Todo;
     }());

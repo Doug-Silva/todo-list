@@ -62,9 +62,9 @@
         render(): string {
             return `
             ---> Reminder <---
-            description: ${this.description}
-            date: ${DateUtils.formatDate(this.date)}
-            platform: ${this.notifications.join(',')}
+            Descrição: ${this.description}
+            Data: ${DateUtils.formatDate(this.date)}
+            Tipo Notificação: ${this.notifications.join(',')}
             `;
         }
     }
@@ -85,10 +85,10 @@
         render(): string {
             return `
             ---> TODO <---
-            description: ${this.description}
-            done: ${this.done}
+            Descrição: ${this.description}
+            Conclusão: ${this.done}
             `;
-        } 
+        }
     }
 
     const todo = new Todo('TODO criado com a classe');
@@ -99,9 +99,9 @@
         getTodo(form: HTMLFormElement): Todo {
             const todoDescription = form.todoDescription.value;
             form.reset();
-        return new Todo(todoDescription);
+            return new Todo(todoDescription);
         },
-        
+
         getReminder(form: HTMLFormElement): Reminder {
             const reminderNotifications = [
                 form.notification.value as NotificationPlatform,
