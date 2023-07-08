@@ -1,5 +1,35 @@
 (() => {
 
+    //enum tipos de notificações
+    enum NotificationPlatform {
+        SMS = 'SMS',
+        EMAIL = 'EMAIL',
+        PUSH_NOTIFICATION = 'PUSH_NOTIFICATION',
+    }
+
+    //função para atribuir um ID
+    const UUID = (): string => {
+        return Math.random().toString(32).substring(2, 9);
+    };
+
+    //função para formatar a data
+    const DateUtils = {
+        tomorrow(): Date {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            return tomorrow;
+        },
+
+        today(): Date {
+            return new Date();
+        },
+
+        formatDate(date: Date): string {
+            return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+        }
+    };
+
+    //interface para as Task (Tarefas)
     interface Task {
         id: string;
         dateCreated: Date;
@@ -8,30 +38,37 @@
         render(): string;
     }
 
+    //classe Reminder (Lembrete)
     class Reminder implements Task {
-        id: string = '';
-        dateCreated: Date = new Date();
-        dateUpdated: Date = new Date();
+        id: string = UUID();
+        dateCreated: Date = DateUtils.today();
+        dateUpdated: Date = DateUtils.today();
         description: string = '';
 
-        date: Date = new Date();
-        notifications: Array<string> = ['EMAIL'];
+        date: Date = DateUtils.tomorrow();
+        notifications: Array<NotificationPlatform> = [NotificationPlatform.EMAIL];
 
-        constructor(description: string, date: Date, notifications: Array<string>) {
+        constructor(description: string, date: Date, notifications: Array<NotificationPlatform>) {
             this.description = description;
             this.date = date;
             this.notifications = notifications;
         }
 
         render(): string {
-            return JSON.stringify(this);
+            return `
+            ---> Reminder <---
+            description: ${this.description}
+            date: ${DateUtils.formatDate(this.date)}
+            platform: ${this.notifications.join(',')}
+            `;
         }
     }
 
+    //classe TODO (Pendência)
     class Todo implements Task {
-        id: string = '';
-        dateCreated: Date = new Date();
-        dateUpdated: Date = new Date();
+        id: string = UUID();
+        dateCreated: Date = DateUtils.today();
+        dateUpdated: Date = DateUtils.today();
         description: string = '';
 
         done: boolean = false;
@@ -41,12 +78,16 @@
         }
 
         render(): string {
-            return JSON.stringify(this);
-        }  
+            return `
+            ---> TODO <---
+            description: ${this.description}
+            done: ${this.done}
+            `;
+        } 
     }
 
     const todo = new Todo('TODO criado com a classe');
-    const reminder = new Reminder('Reminder criado com a classe', new Date(), ['EMAIL']);
+    const reminder = new Reminder('Reminder criado com a classe', new Date(), [NotificationPlatform.EMAIL]);
 
     //criando a view
     const taskView = {
